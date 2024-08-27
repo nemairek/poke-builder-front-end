@@ -4,7 +4,10 @@ import { useState } from 'react';
 import * as pokemonService from '../../services/pokemonService'
 
 
-const Database = ({}) => {
+
+
+
+const Database = ({myPokemon, setMyPokemon}) => {
   const user = useContext(AuthedUserContext);
   const [search, setSearch] = useState('');
   const [pokemon, setPokemon] = useState(null)
@@ -17,7 +20,11 @@ const Database = ({}) => {
     setPokemon(newPokemon)
   }
 
-  const [myPokemon, setMyPokemon] = useState([]);
+const catchPokemon = () => {
+if (pokemon) {
+setMyPokemon((previous) => [...previous, pokemon])
+}
+};
 
   return (
     <main>
@@ -41,7 +48,7 @@ const Database = ({}) => {
          {pokemon.abilities.map((ability) => <li>{ability.ability.name}</li>  )}
         </ul>
         <img src="ball/beast.png"/>
-        <button>Catch</button>
+        <button onClick={catchPokemon}>Catch</button>
         </div>}
     </main>
   );

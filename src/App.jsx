@@ -6,17 +6,20 @@ import Dashboard from './components/Dashboard/Dashboard';
 import Database from './components/Database/Database';
 import SignupForm from './components/SignupForm/SignupForm';
 import SigninForm from './components/SigninForm/SigninForm';
-import * as authService from '../src/services/authService'; // import the authservice
-
+import * as authService from '../src/services/authService'; 
 export const AuthedUserContext = createContext(null);
 
 const App = () => {
-  const [user, setUser] = useState(authService.getUser()); // using the method from authservice
+  const [user, setUser] = useState(authService.getUser());
+
+  const [myPokemon, setMyPokemon] = useState([]);
 
   const handleSignout = () => {
     authService.signout();
     setUser(null);
   };
+
+
 
   return (
     <>
@@ -25,8 +28,12 @@ const App = () => {
         <Routes>
           {user ? ( 
             <>
-            <Route path="/" element={<Dashboard user={user} />} />
-           <Route path="/search" element={<Database user={user} />} />
+            <Route path="/" element={<Dashboard user={user} 
+            myPokemon={myPokemon} 
+            />} />
+           <Route path="/search" element={<Database user={user} 
+           myPokemon={myPokemon} setMyPokemon={setMyPokemon}
+           />} />
            </>
           ) : ( 
             <Route path="/" element={<Landing />} />
