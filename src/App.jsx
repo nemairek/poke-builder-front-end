@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import NavBar from './components/NavBar/NavBar';
 import Landing from './components/Landing/Landing';
 import Dashboard from './components/Dashboard/Dashboard';
+import Database from './components/Database/Database';
 import SignupForm from './components/SignupForm/SignupForm';
 import SigninForm from './components/SigninForm/SigninForm';
 import * as authService from '../src/services/authService'; // import the authservice
@@ -22,9 +23,12 @@ const App = () => {
       <AuthedUserContext.Provider value={user}>
         <NavBar user={user} handleSignout={handleSignout} />
         <Routes>
-          {user ? (
+          {user ? ( 
+            <>
             <Route path="/" element={<Dashboard user={user} />} />
-          ) : (
+           <Route path="/search" element={<Database user={user} />} />
+           </>
+          ) : ( 
             <Route path="/" element={<Landing />} />
           )}
           <Route path="/signup" element={<SignupForm setUser={setUser} />} />

@@ -13,4 +13,6 @@ const getPokemon = async (pokename) => {
         }
       };
 
+
+
       export{getPokemon}
