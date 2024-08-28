@@ -20,6 +20,7 @@ const App = () => {
     setUser(null);
   };
 
+
   useEffect(() => {
     const fetchPokemon = async () => {
       try {

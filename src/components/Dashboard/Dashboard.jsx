@@ -2,14 +2,14 @@ import { AuthedUserContext } from '../../App';
 import { useContext } from 'react';
 import { useState } from 'react';
 import * as pokemonService from '../../services/pokemonService'
-
+import { useEffect } from 'react';
 
 const Dashboard = ({myPokemon}) => {
   const user = useContext(AuthedUserContext);
 
   
 const releasePokemon = (pokemon) => {
-const pokeTeam = myPokemon.filter(pal => pal.name !== pokemon.name) ;
+const pokeTeam = myPokemon.filter(pokemon => pokemon.name !== pokemon.name) ;
 
 }
 
@@ -34,7 +34,7 @@ const pokeTeam = myPokemon.filter(pal => pal.name !== pokemon.name) ;
          <h3>Abilities:</h3>
          {pokemon.abilities.map((ability) => <li key={ability}>{ability}</li>  )}
         </ul>
-        <ul><button onClick={releasePokemon}>Release</button></ul>
+        <ul><button onClick={() => releasePokemon(pokemon)}>Release</button></ul>
         
           </>
         ))}

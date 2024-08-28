@@ -38,4 +38,20 @@ const addNewPokemon = async (pokemon) => {
     }
 };
 
-export { getPokemon, addNewPokemon, pokeDex }
+const releasePokemon = async (pokeId) => {
+    try {
+      const res = await fetch(`${BASE_URL}/${pokeId}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+      return res.json();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
+  
+
+export { getPokemon, addNewPokemon, pokeDex, releasePokemon }
