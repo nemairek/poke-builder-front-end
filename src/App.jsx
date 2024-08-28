@@ -1,4 +1,4 @@
-import { useState, createContext } from 'react';
+import { useState, createContext, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import NavBar from './components/NavBar/NavBar';
 import Landing from './components/Landing/Landing';
@@ -7,6 +7,7 @@ import Database from './components/Database/Database';
 import SignupForm from './components/SignupForm/SignupForm';
 import SigninForm from './components/SigninForm/SigninForm';
 import * as authService from '../src/services/authService'; 
+import * as pokemonService from '../src/services/pokemonService'
 export const AuthedUserContext = createContext(null);
 
 const App = () => {
@@ -19,8 +20,20 @@ const App = () => {
     setUser(null);
   };
 
-
-
+  useEffect(() => {
+    const fetchPokemon = async () => {
+      try {
+        const pokemon = await pokemonService.pokeDex()
+        if (pokemon.error) {
+          throw new Error(pokemon.error)
+        }
+        setMyPokemon(pokemon)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    fetchPokemon()
+  }, [user])
   return (
     <>
       <AuthedUserContext.Provider value={user}>

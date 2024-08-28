@@ -6,8 +6,13 @@ import * as pokemonService from '../../services/pokemonService'
 
 const Dashboard = ({myPokemon}) => {
   const user = useContext(AuthedUserContext);
-  // const [search, setSearch] = useState('');
+
   
+const releasePokemon = (pokemon) => {
+const pokeTeam = myPokemon.filter(pal => pal.name !== pokemon.name) ;
+
+}
+
   return (
     <main>
       <h1>{user.username}'s Pokemon</h1>
@@ -17,17 +22,20 @@ const Dashboard = ({myPokemon}) => {
     
 
        { myPokemon.map((pokemon, index) => (
-        <>
-          <p> {pokemon.name} </p>
-          <img src={pokemon.sprites.front_default} />
-          <ul>
-           <h3>Type</h3>
-           {pokemon.types.map((type) => <li>{type.type.name}</li>  )}
-          </ul>
-          <ul>
-           <h3>Abilities</h3>
-           {pokemon.abilities.map((ability) => <li>{ability.ability.name}</li>  )}
-          </ul>
+        <>           
+        <img src={pokemon.image} />
+        <h2>NAME: {pokemon.name}</h2>
+        <h3>POKE-ID: {pokemon.pokeId}</h3>
+        <ul>
+         <h3>Type:</h3>
+         {pokemon.type.map((type) => <li key={type}>{type}</li>  )}
+        </ul>
+        <ul>
+         <h3>Abilities:</h3>
+         {pokemon.abilities.map((ability) => <li key={ability}>{ability}</li>  )}
+        </ul>
+        <ul><button onClick={releasePokemon}>Release</button></ul>
+        
           </>
         ))}
 

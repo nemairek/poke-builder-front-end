@@ -12,7 +12,7 @@ const Database = ({myPokemon, setMyPokemon}) => {
   const [search, setSearch] = useState('');
   const [pokemon, setPokemon] = useState(null)
   const handleChange = (event) => {
-    setSearch(event.target.value);
+    setSearch(event.target.value); 
   }
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -20,15 +20,25 @@ const Database = ({myPokemon, setMyPokemon}) => {
     setPokemon(newPokemon)
   }
 
-const catchPokemon = () => {
-if (pokemon) {
-setMyPokemon((previous) => [...previous, pokemon])
-}
+const catchPokemon = async (pokemon) => {
+  console.log('pokemon', pokemon)
+  const newPokemon = {
+    pokeId: pokemon.id,
+    name: pokemon.name,
+    type: pokemon.types.map((type) => type.type.name),
+    abilities: pokemon.abilities.map((ability) => ability.ability.name),
+    image: pokemon.sprites.front_default,
+  }
+  console.log(newPokemon)
+const addPokemon = await pokemonService.addNewPokemon(newPokemon)
+setMyPokemon([...myPokemon, addPokemon])
 };
 
   return (
     <main>
+        <img src='pokeball.sprites.front_default' />
       <h1>Welcome, Trainer {user.username}</h1>
+    
       <p>
         This is the poke-builder data-bank, where you can view all existing pokemon, make note of ones you own, and make comments to hopefully advise other trainers on if a pokemon is suitible for them.
       </p>
@@ -36,19 +46,20 @@ setMyPokemon((previous) => [...previous, pokemon])
         <input type="text" name = 'search' onChange = {handleChange} value = {search}/>
         <button type='submit'>Search</button>
       </form>
-      {pokemon && <div> 
-        <p>{pokemon.name}</p>
+      {pokemon && <div>        
         <img src={pokemon.sprites.front_default} />
+        <h2>NAME: {pokemon.name}</h2>
+        <h3>POKE-ID: {pokemon.id}</h3>
         <ul>
-         <h3>Type</h3>
-         {pokemon.types.map((type) => <li>{type.type.name}</li>  )}
+         <h3>Type:</h3>
+         {pokemon.types.map((type) => <li key={type.type.name}>{type.type.name}</li>  )}
         </ul>
         <ul>
-         <h3>Abilities</h3>
-         {pokemon.abilities.map((ability) => <li>{ability.ability.name}</li>  )}
+         <h3>Abilities:</h3>
+         {pokemon.abilities.map((ability) => <li key={ability.ability.name}>{ability.ability.name}</li>  )}
         </ul>
         <img src="ball/beast.png"/>
-        <button onClick={catchPokemon}>Catch</button>
+        <button onClick={() => catchPokemon(pokemon)}>Catch</button>
         </div>}
     </main>
   );
