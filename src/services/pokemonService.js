@@ -72,7 +72,37 @@ const releasePokemon = async (pokemon) => {
       } catch (error) {
         console.log(error);
       }
-  }
-  
+  };
 
-export { getPokemon, addNewPokemon, pokeDex, releasePokemon, createComment }
+  const deleteComment = async (pokeId, commentId) => {
+    try {
+        const res = await fetch(`${BACKEND_URL}/${pokeId}/comments/${commentId}`, {
+          method: 'DELETE',
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+              'Content-Type': 'application/json'
+          },
+        });
+        return res.json();
+      } catch (error) {
+        console.log(error);
+      }
+  }
+
+  const editComment = async (formData, pokeId, commentId) => {
+    try {
+        const res = await fetch(`${BACKEND_URL}/${pokeId}/comments/${commentId}`, {
+          method: 'PUT',
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        });
+        return res.json();
+      } catch (error) {
+        console.log(error);
+      }
+  }
+
+export { getPokemon, addNewPokemon, pokeDex, releasePokemon, createComment, deleteComment, editComment }

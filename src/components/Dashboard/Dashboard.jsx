@@ -10,31 +10,49 @@ import { useNavigate } from 'react-router-dom';
 const Dashboard = ({ myPokemon, setMyPokemon }) => {
   const [pokemon, setPokemon] = useState(null);
   const user = useContext(AuthedUserContext);
-const navigate = useNavigate()
+  const navigate = useNavigate()
 
   const [formData, setFormData] = useState({ text: '' })
 
+  const [edit, setEdit] = useState(false)
+
   const freePokemon = async (evt, pokemon) => {
-    console.log(pokemon)
     const releasedPokemon = await pokemonService.releasePokemon(pokemon._id);
-    setMyPokemon(myPokemon.map((myPokemon) => myPokemon._id !== releasedPokemon._id));
+    setMyPokemon(myPokemon.filter((myPokemon) => myPokemon._id !== releasedPokemon._id));
     navigate('/');
 
   }
 
+
   const handleChangeComment = (evt) => {
-   
+
     setFormData({ ...formData, [evt.target.name]: evt.target.value });
   };
+
+
+  const handleChangeEdit = (evt) => {
+
+    setFormData({ ...formData, [evt.target.name]: evt.target.value });
+  };
+
+
 
   const handleSubmitComment = async (evt, pokemon) => {
     evt.preventDefault();
     const addNewComment = await pokemonService.createComment(formData, pokemon._id)
-    console.log(addNewComment)
-    setFormData({ text: '' });
+    setMyPokemon(myPokemon.map(pokemon => pokemon._id === addNewComment._id ? addNewComment : pokemon ))
   };
 
+  const handleDeleteComment = async (pokemon, comment) => {
+    const deleteComment = await pokemonService.deleteComment(pokemon._id, comment._id)
+   setMyPokemon(myPokemon.map(pokemon => pokemon._id === deleteComment._id ? deleteComment : pokemon ))
+  };
 
+  const handleEditComment = async (pokemon, comment) => {
+    const editComment = await pokemonService.editComment(formData, pokemon._id, comment._id)
+    setMyPokemon(myPokemon.map(pokemon => pokemon._id === editComment._id ? editComment : pokemon ))
+    setEdit(false)
+  };
 
 
   return (
@@ -60,11 +78,6 @@ const navigate = useNavigate()
           </ul>
 
           <>
-            <ul>
-              <button onClick={(evt) => freePokemon(evt, pokemon)}>Release</button>
-            </ul>
-          </>
-          <>
             <form onSubmit={(evt) => handleSubmitComment(evt, pokemon)}>
               <label htmlFor="text-input">Your comment:</label>
               <textarea
@@ -78,11 +91,27 @@ const navigate = useNavigate()
               <button type="submit">SUBMIT COMMENT</button>
             </form>
             {pokemon.comments.map(comment => <div key={comment._id}>
-              <p>{comment.text}</p>
-              {/* <p>{comment.author._id}</p> */}
-              <button>UPDATE</button>
-              
-            </div>) }
+              {edit === comment._id ?
+              <>
+              <textarea
+              required      
+              type="text"
+              name="text"
+              id="text-input"
+              value={formData.text}
+              onChange={handleChangeComment}
+            />
+            <button onClick={() => setEdit(false)}>Cancel</button>   <button onClick={(evt) => handleEditComment(pokemon, comment)}>Update</button>
+            </>
+              :<p onClick={() =>setEdit(comment._id)}>{comment.text}</p>}
+
+
+
+
+                <ul>
+              <button onClick={(evt) => handleDeleteComment(pokemon, comment)}>DELETE</button>
+              </ul>
+            </div>)}
           </>
         </div>
       ))}
