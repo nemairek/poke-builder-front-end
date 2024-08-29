@@ -38,9 +38,14 @@ const addNewPokemon = async (pokemon) => {
     }
 };
 
-const releasePokemon = async (pokeId) => {
+
+
+
+
+const releasePokemon = async (pokemon) => {
+  console.log(pokemon)
     try {
-      const res = await fetch(`${BASE_URL}/${pokeId}`, {
+      const res = await fetch(`${BACKEND_URL}/${pokemon}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -52,6 +57,22 @@ const releasePokemon = async (pokeId) => {
     }
   };
   
+
+  const createComment = async (formData, pokeId) => {
+    try {
+        const res = await fetch(`${BACKEND_URL}/${pokeId}/comments`, {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        });
+        return res.json();
+      } catch (error) {
+        console.log(error);
+      }
+  }
   
 
-export { getPokemon, addNewPokemon, pokeDex, releasePokemon }
+export { getPokemon, addNewPokemon, pokeDex, releasePokemon, createComment }

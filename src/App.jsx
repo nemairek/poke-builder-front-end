@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import NavBar from './components/NavBar/NavBar';
 import Landing from './components/Landing/Landing';
 import Dashboard from './components/Dashboard/Dashboard';
+import { releasePokemon } from '../src/services/pokemonService';
 import Database from './components/Database/Database';
 import SignupForm from './components/SignupForm/SignupForm';
 import SigninForm from './components/SigninForm/SigninForm';
@@ -44,6 +45,8 @@ const App = () => {
             <>
             <Route path="/" element={<Dashboard user={user} 
             myPokemon={myPokemon} 
+            releasePokemon={releasePokemon}
+            setMyPokemon={setMyPokemon}
             />} />
            <Route path="/search" element={<Database user={user} 
            myPokemon={myPokemon} setMyPokemon={setMyPokemon}
