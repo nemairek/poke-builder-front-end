@@ -59,7 +59,6 @@ const Dashboard = ({ myPokemon, setMyPokemon }) => {
   return (
     
     <main id='dashboard'>
-      <link rel="stylesheet" href="../../" />
 
       <h1>{user.username}'s Pokemon</h1>
       <h2>
@@ -80,7 +79,7 @@ const Dashboard = ({ myPokemon, setMyPokemon }) => {
             <h3>Abilities:</h3>
             {pokemon.abilities.map((ability) => <li key={ability}>{ability}</li>)}
           </ul>
-
+          <button onClick={(evt) => freePokemon(evt, pokemon)}>Release</button>
           <>
            {!edit && <form onSubmit={(evt) => handleSubmitComment(evt, pokemon)}>
               <label htmlFor="text-input">Your comment:</label>
