@@ -4,7 +4,7 @@ import { useState } from 'react';
 import * as pokemonService from '../../services/pokemonService'
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import { pokeId } from '../Database/Database'
+
 
 
 const Dashboard = ({ myPokemon, setMyPokemon }) => {
@@ -13,6 +13,7 @@ const Dashboard = ({ myPokemon, setMyPokemon }) => {
   const navigate = useNavigate()
 
   const [formData, setFormData] = useState({ text: '' })
+
 
   const [edit, setEdit] = useState(false)
 
@@ -52,11 +53,14 @@ const Dashboard = ({ myPokemon, setMyPokemon }) => {
     const editComment = await pokemonService.editComment(formData, pokemon._id, comment._id)
     setMyPokemon(myPokemon.map(pokemon => pokemon._id === editComment._id ? editComment : pokemon ))
     setEdit(false)
-  };
+  }
 
 
   return (
-    <main>
+    
+    <main id='dashboard'>
+      <link rel="stylesheet" href="../../" />
+
       <h1>{user.username}'s Pokemon</h1>
       <h2>
         Here are your pokemon
@@ -78,7 +82,7 @@ const Dashboard = ({ myPokemon, setMyPokemon }) => {
           </ul>
 
           <>
-            <form onSubmit={(evt) => handleSubmitComment(evt, pokemon)}>
+           {!edit && <form onSubmit={(evt) => handleSubmitComment(evt, pokemon)}>
               <label htmlFor="text-input">Your comment:</label>
               <textarea
                 required
@@ -89,7 +93,7 @@ const Dashboard = ({ myPokemon, setMyPokemon }) => {
                 onChange={handleChangeComment}
               />
               <button type="submit">SUBMIT COMMENT</button>
-            </form>
+            </form>}
             {pokemon.comments.map(comment => <div key={comment._id}>
               {edit === comment._id ?
               <>
@@ -99,7 +103,7 @@ const Dashboard = ({ myPokemon, setMyPokemon }) => {
               name="text"
               id="text-input"
               value={formData.text}
-              onChange={handleChangeComment}
+              onChange={handleChangeEdit}
             />
             <button onClick={() => setEdit(false)}>Cancel</button>   <button onClick={(evt) => handleEditComment(pokemon, comment)}>Update</button>
             </>

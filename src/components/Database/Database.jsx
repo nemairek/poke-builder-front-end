@@ -33,7 +33,8 @@ const Database = ({ myPokemon, setMyPokemon }) => {
   };
 
   return (
-    <main>
+    <main id='database'>
+      
       <img src='pokeball.sprites.front_default' />
       <h1>Welcome, Trainer {user.username}</h1>
 
@@ -44,7 +45,7 @@ const Database = ({ myPokemon, setMyPokemon }) => {
         <input type="text" name='search' onChange={handleChange} value={search} />
         <button type='submit'>Search</button>
       </form>
-      {pokemon && <div>
+      {pokemon && <div id='data'>
         <img src={pokemon.sprites.front_default} />
         <h2>NAME: {pokemon.name}</h2>
         <h3>POKE-ID: {pokemon.id}</h3>
@@ -57,7 +58,7 @@ const Database = ({ myPokemon, setMyPokemon }) => {
           {pokemon.abilities.map((ability) => <li key={ability.ability.name}>{ability.ability.name}</li>)}
         </ul>
 
-        <img src="ball/beast.png" />
+        <img src="../../assets/poke-ball.png" />
         <button onClick={() => catchPokemon(pokemon)}>Catch</button>
       </div>}
      
