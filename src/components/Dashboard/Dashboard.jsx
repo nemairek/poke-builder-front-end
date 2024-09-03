@@ -79,7 +79,7 @@ const Dashboard = ({ myPokemon, setMyPokemon }) => {
             <h3>Abilities:</h3>
             {pokemon.abilities.map((ability) => <li key={ability}>{ability}</li>)}
           </ul>
-          <button onClick={(evt) => freePokemon(evt, pokemon)}>Release</button>
+          <button onClick={(evt) => freePokemon(evt, pokemon)}>RELEASE</button>
           <>
            {!edit && <form onSubmit={(evt) => handleSubmitComment(evt, pokemon)}>
               <label htmlFor="text-input">Your comment:</label>
@@ -104,7 +104,7 @@ const Dashboard = ({ myPokemon, setMyPokemon }) => {
               value={formData.text}
               onChange={handleChangeEdit}
             />
-            <button onClick={() => setEdit(false)}>Cancel</button>   <button onClick={(evt) => handleEditComment(pokemon, comment)}>Update</button>
+            <button onClick={() => setEdit(false)}>CANCEL</button>   <button onClick={(evt) => handleEditComment(pokemon, comment)}>UPDATE</button>
             </>
               :<p onClick={() =>setEdit(comment._id)}>{comment.text}</p>}
 

@@ -58,8 +58,11 @@ const Database = ({ myPokemon, setMyPokemon }) => {
           {pokemon.abilities.map((ability) => <li key={ability.ability.name}>{ability.ability.name}</li>)}
         </ul>
 
+
         <img src="../../assets/poke-ball.png" />
         <button onClick={() => catchPokemon(pokemon)}>Catch</button>
+
+
       </div>}
      
     </main>

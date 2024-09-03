@@ -8,24 +8,67 @@
 
 body {
    background-color: rgb(7, 223, 72);
+   text-align: center;
+   margin: 0px;
 }
 
 
 #dashboard {
-    
+
 background-color: rgb(0, 18, 182);
 font-size: large;
 font-family: 'Press Start 2P';
 color: rgb(255, 238, 0);
 
+
 }
 
 #database {
-    background-color: red;
-    color: rgb(255, 255, 255);
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 251, 0);
+    list-style-type: none;
 }
+
+#database ul {
+    list-style-type: none;
+    
+}
+
+#dashboard ul {
+    list-style-type: none;
+}
+
 
 div#data {
 
     font-family: 'Press Start 2P';
 }
+
+.navbar ul{
+    list-style-type: none;
+    background-color: rgb(50, 0, 0);
+    padding: 0px;
+    margin:0px;
+    color: silver;
+    overflow: hidden;
+}
+
+
+.navbar a{
+color: gold;
+text-decoration: none;
+padding: 15px;
+display: block;
+text-align: center;
+}
+
+
+.navbar a:hover{
+ background-color: red;
+ color: silver;
+    }
+
+    .navbar li{
+        float:left;
+    }
+
