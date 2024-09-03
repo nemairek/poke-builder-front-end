@@ -8,7 +8,7 @@
 
   # Poke-Builder
 
-  ### [CLICK TO DEMO](https://trello.com/b/1XxebpdT/poke-builder)
+  ### [CLICK TO DEMO](https://poke-builder.netlify.app/)
 
   ##### Kuziva Nemaire
 
