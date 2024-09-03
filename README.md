@@ -1,6 +1,6 @@
 <div id="header" align="center">
 
-  <img src=https://pm1.aminoapps.com/6832/9f5f82bd29c7174aef24b76529ea3b0599913a91v2_hq.jpg width="800" height="400">
+  <img src=![alt text](image-3.png)>
 
 </div>
 
@@ -22,7 +22,7 @@
   ## :camera_flash: Screenshot
 
  <img src =
-    ![image](https://github.com/user-attachments/assets/a145da44-5da3-45c4-b02e-b959b7e088d9)
+   ![alt text](image-2.png)
 
 
 
@@ -52,8 +52,8 @@
 
 <details open>
   <summary> Deployed Link (SIMON) </summary>
-  <a href="https://game-trax-5085ddcbb9e3.herokuapp.com/"
-    > https:https://game-trax-5085ddcbb9e3.herokuapp.com/ </a
+  <a href="https://poke-builder.netlify.app/"
+    > https://poke-builder.netlify.app/ </a
   >
 </details>
 
