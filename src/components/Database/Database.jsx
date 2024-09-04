@@ -60,7 +60,7 @@ const Database = ({ myPokemon, setMyPokemon }) => {
 
 
         <img src="../../assets/poke-ball.png" />
-        <button onClick={() => catchPokemon(pokemon)}>Catch</button>
+        <button className='btn' onClick={() => catchPokemon(pokemon)}>Catch</button>
 
 
       </div>}

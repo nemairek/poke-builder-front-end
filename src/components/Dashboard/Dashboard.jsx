@@ -112,7 +112,7 @@ const Dashboard = ({ myPokemon, setMyPokemon }) => {
 
 
                 <ul>
-              <button onClick={(evt) => handleDeleteComment(pokemon, comment)}>DELETE</button>
+              <button className='btn' onClick={(evt) => handleDeleteComment(pokemon, comment)}>DELETE</button>
               </ul>
             </div>)}
           </>

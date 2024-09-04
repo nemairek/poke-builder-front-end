@@ -72,9 +72,9 @@ text-align: center;
         float:left;
     }
 
-button{
-color: #008791;
-background-color: aquamarine;
-border-color: aquamarine;
+button .btn{
+color: #000000;
+background-color: #00c7b6;
+border-color: rgb(255, 0, 0);
 
 }
